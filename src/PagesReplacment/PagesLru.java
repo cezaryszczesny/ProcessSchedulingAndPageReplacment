@@ -1,29 +1,31 @@
 package PagesReplacment;
 
 public class PagesLru {
-    private int[] pagesFaults3;
-    private int[] pagesFaults4;
+    private int[] pagesFaults;
+
 
     public PagesLru() {
-        pagesFaults3 = new int[100];
-        pagesFaults4 = new int[100];
+        pagesFaults = new int[100];
+
     }
 
     public PagesLru(int amount) {
-        pagesFaults3 = new int[amount];
-        pagesFaults4 = new int[amount];
+        pagesFaults = new int[amount];
+
     }
 
-    public int[] getPagesFaults3() {
-        return pagesFaults3;
+    public int[] getPagesFaults() {
+        return pagesFaults;
     }
 
-    public int[] getPagesFaults4() {
-        return pagesFaults4;
-    }
+
     public void calculatePagesFaults(int[][] ciag, int amountOfFrames) {
         int[] frame = new int[amountOfFrames];
-
+        if(pagesFaults[0] != 0) {
+            for (int i = 0; i < pagesFaults.length; i++) {
+                pagesFaults[i] = 0;
+            }
+        }
         int frameCounter = 0;
         int p;
         for (int i = 0; i < ciag.length; i++) {
@@ -35,13 +37,21 @@ public class PagesLru {
                 for (int k = 0; k < frame.length; k++) {
                     if (frame[k] == ciag[i][j]) {
                         p = k;
-                        frameCounter++;
+                        if(frameCounter >= amountOfFrames){
+                            frameCounter = 0;
+                        }
+                        else{
+                            frameCounter++;
+                        }
                         break;
                     }
                 }
                 if (p == -1) {
+                    if(frameCounter >= amountOfFrames){
+                        frameCounter = 0;
+                    }
                     frame[frameCounter] = ciag[i][j];
-                    pagesFaults4[i]++;
+                    pagesFaults[i]++;
                     frameCounter++;
                     if (frameCounter == frame.length) {
                         frameCounter = 0;

@@ -1,26 +1,23 @@
 package PagesReplacment;
 
 public class PagesFifo {
-    private int[] pagesFaults3;
-    private int[] pagesFaults4;
+    private int[] pagesFaults;
+
 
     public PagesFifo() {
-        pagesFaults3 = new int[100];
-        pagesFaults4 = new int[100];
+        pagesFaults = new int[100];
+
     }
 
     public PagesFifo(int amount) {
-        pagesFaults3 = new int[amount];
-        pagesFaults4 = new int[amount];
+        pagesFaults = new int[amount];
+
     }
 
-    public int[] getPagesFaults3() {
-        return pagesFaults3;
+    public int[] getPagesFaults() {
+        return pagesFaults;
     }
 
-    public int[] getPagesFaults4() {
-        return pagesFaults4;
-    }
 
     /*public void threeFrames(int[][] ciag) {
         int[] frame = new int[3];
@@ -45,11 +42,15 @@ public class PagesFifo {
                 }
             }
         }
-    }*/ // long version of three frames, to check if calculate method works correctly (I was sure this one worked correctly)
+    }*/ // long version of three frames, to check if calculate method works correctly (I was sure this one was corrrect )
 
     public void calculatePagesFaults(int[][] ciag, int amountOfFrames) {
         int[] frame = new int[amountOfFrames];
-
+        if(pagesFaults[0] != 0) {
+            for (int i = 0; i < pagesFaults.length; i++) {
+                pagesFaults[i] = 0;
+            }
+        }
         int frameCounter = 0;
         int p;
         for (int i = 0; i < ciag.length; i++) {
@@ -66,7 +67,7 @@ public class PagesFifo {
                 }
                 if (p == -1) {
                     frame[frameCounter] = ciag[i][j];
-                    pagesFaults4[i]++;
+                    pagesFaults[i]++;
                     frameCounter++;
                     if (frameCounter == frame.length) {
                         frameCounter = 0;

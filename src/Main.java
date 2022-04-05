@@ -4,33 +4,46 @@ import ProcessScheduling.AlgFcfs;
 import ProcessScheduling.AlgSjf;
 import ProcessScheduling.NumbersProcess;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args){
+
+
+        Menu menu = new Menu();
+
+
+        int x;
+        do{
+            x=menu.mainMenu();
+            if(x == 1){
+                menu.pageMenu();
+
+            }
+            else if(x == 2){
+                menu.schedulingMenu();
+            }
+        }while(x != 0);
+
+         /*
         Scanner input = new Scanner(System.in); //For inputs
         NumbersProcess generator = new NumbersProcess();//For new numbers
         Test test = new Test(); //For tests
         AlgFcfs fcfs = new AlgFcfs(); //For FCFS alhorithm
         AlgSjf sjf = new AlgSjf();
         PagesNumbers generate = new PagesNumbers();
-        PagesFifo fifo = new PagesFifo();
-
-        generate.generate(); //generatePages
+        PagesFifo fifo = new PagesFifo()/ //used for testing
+        */
+       // generate.generate(); //generatePages
        //generator.generate(); //generate numbers
 
-           /*try {
-            Data saveFile = new Data();
-            saveFile.printToFile(generator.getTab());
-        }
-        catch (IOException ioException) {
-            ioException.printStackTrace();
-        } //write generate numbers to file
-    */
+
+
 
 
         //Pages replacment Algorithm tests
-        //test.debugGeneratePages(generate.getCiag()); //debug PagesReplacment.PagesNumbers generator
+        //test.testGeneratePages(generate.getTab()); //test PagesReplacment.PagesNumbers generator
         // test.testPagesFaults(fifo.getPagesFaults3());
         // System.out.println("Drugi Algorytm");
         // fifo.calculatePagesFaults(generate.getCiag(),3);
@@ -39,10 +52,10 @@ public class Main {
 
 
         //Process schedulinng algorithm tests
-        //test.debugGenerate(generator.getTab());//debug ProcessNumbers generator
-        //test.debugSjf(sjf.calculateParameters((generator.getTab()))); //debug sjf algorithm
-        //test.debugGenerate(generator.sortByArrivals(generator.getTab())); //Debug sort by Time of arrival
-        //fcfs.calculateParameters(generator.sortByArrivals(generator.getTab())); //calculate average time and average execution time
-        //test.debugParameters(fcfs.getAverageTime(), fcfs.getAverageExecute()); //debug calculation
+        //test.testGenerate(generator.getTab());//test ProcessNumbers generator
+        //test.testSjf(sjf.calculateParameters((generator.getTab()))); //test sjf algorithm
+        //test.testGenerate(generator.sortByArrivals(generator.getTab())); //test sort by Time of arrival
+       // fcfs.calculateParameters(generator.sortByArrivals(generator.getTab())); //calculate average time and average execution time
+        //test.testParameters(fcfs.getAverageTime(), fcfs.getAverageExecute()); //test calculation
      }
     }

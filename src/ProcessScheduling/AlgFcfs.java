@@ -15,7 +15,7 @@ public class AlgFcfs extends AbstractAlgorithm {
 
         for(int k=0;k<ciag.length;k++){
             int[] completionTime = new int[100];
-            double p=0,temp=0;
+            double p=0,temp;
             averageTat[k]=ciag[k][0][0];
             completionTime[0]=ciag[k][0][0];
             for(int i=1;i<ciag[k].length;i++){
